@@ -15,8 +15,11 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
+// testing the events
 app.post("/events", (req, res) => {
+  console.log(req);
   console.log(req.body);
+  res.send(true);
 })
 
 app.listen(port, () => {
