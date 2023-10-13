@@ -26,5 +26,9 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
 
-// Stop forwarding events
-events.close()
+process.on('exit', code => {
+  console.log("goodbye")
+  // Stop forwarding events
+  events.close()
+});
+
