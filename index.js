@@ -1,5 +1,6 @@
 const SmeeClient = require('smee-client')
 const express = require("express")
+const bodyParser = require('body-parser')
 
 const smee = new SmeeClient({
   source: 'https://smee.io/JzO668f7CNnkD2e',
@@ -9,7 +10,11 @@ const smee = new SmeeClient({
 const app = express()
 const port = 3000
 
-app.use(express.json())
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
 
 const events = smee.start()
 
@@ -19,8 +24,8 @@ app.get('/', (req, res) => {
 
 // testing the events
 app.post("/events", (req, res) => {
-  //console.log(req);
-  console.log(req.body);
+  let payload = JSON.parse(req.body["payload"]);
+  console.log(payload)
   res.send(true);
 })
 
