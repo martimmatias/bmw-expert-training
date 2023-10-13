@@ -1,0 +1,29 @@
+on:
+  issues:
+    types:
+      - published
+  issue_comment:
+    types:
+      - created
+
+jobs:
+  welcome:
+    if: $${{github.event_name}} == "issues"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: peter-evans/create-or-update-comment@v3
+        with:
+          issue-number: ${{ github.event.issue.number}}
+          body: |
+            Hey, welcome!
+            Thank you for creating an issue. This is an automated response!
+          reactions: '+1'
+  pong:
+    if: $${{github.event_name}} == "issue_comment" && contains($${{github.event.comment}}, 'ping')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: peter-evans/create-or-update-comment@v3
+        with:
+          issue-number: ${{ github.event.issue.number}}
+          body: |
+            Pong!
