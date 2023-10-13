@@ -9,6 +9,8 @@ const smee = new SmeeClient({
 const app = express()
 const port = 3000
 
+app.use(express.json())
+
 const events = smee.start()
 
 app.get('/', (req, res) => {
@@ -17,7 +19,7 @@ app.get('/', (req, res) => {
 
 // testing the events
 app.post("/events", (req, res) => {
-  console.log(req);
+  //console.log(req);
   console.log(req.body);
   res.send(true);
 })
