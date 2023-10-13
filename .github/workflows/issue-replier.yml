@@ -10,7 +10,7 @@ jobs:
   welcome:
     runs-on: ubuntu-latest
     steps:
-      - if: github.event_name == "issues"
+      - if: github.event_name == 'issues'
         uses: peter-evans/create-or-update-comment@v3
         with:
           issue-number: ${{ github.event.issue.number}}
